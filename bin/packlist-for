@@ -14,9 +14,9 @@ unless (@ARGV) {
 }
 
 for (@ARGV) {
-    my $plfile = packlist_for($_);
-    if (defined $plfile) {
-        print +(@ARGV > 1 ? "$_: " : ""), $plfile, "\n";
+    my $packlist = packlist_for($_);
+    if (defined $packlist) {
+        print +(@ARGV > 1 ? "$_: " : ""), $packlist, "\n";
     } else {
         $has_error++;
         warn "packlist-for: packlist for $_ not found\n";
