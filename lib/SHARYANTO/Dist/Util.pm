@@ -97,7 +97,7 @@ C<Package::SubPkg> or C<Package/SubPkg.pm>). Return undef if none is found.
 Depending on the content of C<@INC>, the returned path may be absolute or
 relative.
 
-=head2 packlist_for($mod) => LIST
+=head2 list_dist_modules($mod) => LIST
 
 Given installed module name C<$mod> (which must be the name of the main module
 of its distribution), list all the modules. This is done by first finding the

@@ -6,6 +6,8 @@ use warnings;
 
 use SHARYANTO::Dist::Util qw(packlist_for);
 
+# VERSION
+
 my $has_error;
 
 unless (@ARGV) {
@@ -26,6 +28,7 @@ for (@ARGV) {
 exit($has_error ? 1:0);
 
 # ABSTRACT: Locate .packlist for installed Perl module
+# PODNAME: packlist-for
 
 =head1 SYNOPSIS
 
