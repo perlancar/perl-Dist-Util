@@ -30,6 +30,8 @@ exit($has_error ? 1:0);
 =head1 SYNOPSIS
 
  % packlist-for Text::ANSITable Foo
+ Text::ANSITable: /home/steven/perl5/perlbrew/perls/perl-5.18.2/lib/site_perl/5.18.2/x86_64-linux/auto/Text/ANSITable/.packlist
+ packlist for Foo not found
 
 
 =head1 DESCRIPTION
