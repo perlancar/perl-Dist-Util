@@ -16,7 +16,7 @@ unless (@ARGV) {
 for (@ARGV) {
     my $packlist = packlist_for($_);
     if (defined $packlist) {
-        print +(@ARGV > 1 ? "$_: " : ""), $packlist, "\n";
+        print +(@ARGV > 1 ? "$_\t" : ""), $packlist, "\n";
     } else {
         $has_error++;
         warn "packlist-for: packlist for $_ not found\n";
