@@ -1,0 +1,37 @@
+#!/usr/bin/env perl
+
+use 5.010;
+use strict;
+use warnings;
+
+use SHARYANTO::Dist::Util qw(packlist_for);
+
+my $has_error;
+
+unless (@ARGV) {
+    warn "Please specify at least one module\n";
+    exit 99;
+}
+
+for (@ARGV) {
+    my $plfile = packlist_for($_);
+    if (defined $plfile) {
+        print +(@ARGV > 1 ? "$_: " : ""), $plfile, "\n";
+    } else {
+        $has_error++;
+        warn "packlist for $_ not found\n";
+    }
+}
+
+exit($has_error ? 1:0);
+
+# ABSTRACT: Locate .packlist for installed Perl module
+
+=head1 SYNOPSIS
+
+ % packlist-for Text::ANSITable Foo
+
+
+=head1 DESCRIPTION
+
+=cut
