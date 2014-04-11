@@ -9,7 +9,7 @@ use SHARYANTO::Dist::Util qw(packlist_for);
 my $has_error;
 
 unless (@ARGV) {
-    warn "Please specify at least one module\n";
+    warn "packlist-for: Please specify at least one module\n";
     exit 99;
 }
 
@@ -19,7 +19,7 @@ for (@ARGV) {
         print +(@ARGV > 1 ? "$_: " : ""), $plfile, "\n";
     } else {
         $has_error++;
-        warn "packlist for $_ not found\n";
+        warn "packlist-for: packlist for $_ not found\n";
     }
 }
 
