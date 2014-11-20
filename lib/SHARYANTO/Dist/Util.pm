@@ -34,6 +34,9 @@ sub packlist_for {
 sub list_dist_modules {
     my $mod = shift;
 
+    # convenience: convert Foo-Bar to Foo::Bar
+    $mod =~ s/-/::/g;
+
     my $packlist = packlist_for($mod);
     return () unless $packlist;
 
