@@ -1,5 +1,8 @@
 package SHARYANTO::Dist::Util;
 
+# DATE
+# VERSION
+
 use 5.010001;
 use strict;
 use warnings;
@@ -10,11 +13,10 @@ use File::Spec;
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(
-                       packlist_for
                        list_dist_modules
+                       list_dists
+                       packlist_for
                );
-
-# VERSION
 
 sub packlist_for {
     my $mod = shift;
@@ -24,11 +26,33 @@ sub packlist_for {
     }
 
     for (@INC) {
-        return if ref($_);
+        next if ref($_);
         my $f = "$_/$Config{archname}/auto/$mod/.packlist";
         return $f if -f $f;
     }
     undef;
+}
+
+sub list_dists {
+    require File::Find;
+
+    my %dists;
+    for my $inc (@INC) {
+        next if ref($inc);
+        my $prefix = "$inc/$Config{archname}/auto";
+        next unless -d $prefix;
+        File::Find::find(
+            sub {
+                return unless $_ eq '.packlist';
+                my $dist = substr($File::Find::dir, length($prefix)+1);
+                # XXX use platform-neutral path separator
+                $dist =~ s!/!-!g;
+                $dists{$dist}++;
+            },
+            $prefix,
+        );
+    }
+    sort(keys %dists);
 }
 
 sub list_dist_modules {
@@ -99,6 +123,13 @@ C<Package::SubPkg> or C<Package/SubPkg.pm>). Return undef if none is found.
 
 Depending on the content of C<@INC>, the returned path may be absolute or
 relative.
+
+=head2 list_dists() => LIST
+
+Find all C<.packlist> files in C<@INC> and then pick the dist names from the
+paths, because C<.packlist> files are put in:
+
+ $INC/$Config{archname}/auto/Foo/Bar/.packlist
 
 =head2 list_dist_modules($mod) => LIST
 
