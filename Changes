@@ -1,4 +1,11 @@
-Revision history for SHARYANTO-Dist-Util
+Revision history for Dist-Util
+
+0.05    2014-12-03 (PERLANCAR)
+
+	- Rename dist from SHARYANTO-Dist-Util to Dist-Util.
+
+        - Add function: list_dists().
+
 
 0.04    2014-11-20 (PERLANCAR)
 
