@@ -1,4 +1,4 @@
-package SHARYANTO::Dist::Util;
+package Dist::Util;
 
 # DATE
 # VERSION
@@ -102,9 +102,10 @@ sub list_dist_modules {
 
 =head1 SYNOPSIS
 
- use SHARYANTO::Dist::Util qw(
-     packlist_for
+ use Dist::Util qw(
      list_dist_modules
+     list_dists
+     packlist_for
  );
 
  say packlist_for("Text::ANSITable"); # sample output: /home/steven/perl5/perlbrew/perls/perl-5.18.2/lib/site_perl/5.18.2/x86_64-linux/auto/Text/ANSITable/.packlist
@@ -139,10 +140,3 @@ first finding the C<.packlist> file, then look at all the C<.pm> files listed in
 the packlist.
 
 Will return empty list if fails to get the packlist.
-
-
-=head1 SEE ALSO
-
-L<SHARYANTO>
-
-=cut

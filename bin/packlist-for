@@ -1,12 +1,13 @@
 #!perl
 
+# DATE
+# VERSION
+
 use 5.010;
 use strict;
 use warnings;
 
-use SHARYANTO::Dist::Util qw(packlist_for);
-
-# VERSION
+use Dist::Util qw(packlist_for);
 
 my $has_error;
 
