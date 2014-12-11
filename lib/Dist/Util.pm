@@ -132,6 +132,8 @@ paths, because C<.packlist> files are put in:
 
  $INC/$Config{archname}/auto/Foo/Bar/.packlist
 
+Caveat: many Linux distributions strip C<.packlist> files.
+
 =head2 list_dist_modules($mod) => LIST
 
 Given installed module name C<$mod> (which must be the name of the main module
