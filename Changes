@@ -1,5 +1,13 @@
 Revision history for Dist-Util
 
+0.06    2014-12-26 (PERLANCAR)
+
+	- Note about the fact that many linux distros strip .packlist
+	  files.
+
+	- Move bin/packlist-for to App-DistUtils.
+
+
 0.05    2014-12-03 (PERLANCAR)
 
 	- Rename dist from SHARYANTO-Dist-Util to Dist-Util.
