@@ -37,23 +37,30 @@ sub packlist_for {
 sub list_dists {
     require File::Find;
 
+    my %args = @_;
+
     my %dists;
     for my $inc (@INC) {
         next if ref($inc);
         my $prefix = "$inc/$Config{archname}/auto";
         next unless -d $prefix;
+
         File::Find::find(
             sub {
                 return unless $_ eq '.packlist';
                 my $dist = substr($File::Find::dir, length($prefix)+1);
                 # XXX use platform-neutral path separator
                 $dist =~ s!/!-!g;
-                $dists{$dist}++;
+                $dists{$dist} = {dist=>$dist, packlist => "$File::Find::dir/$_"};
             },
             $prefix,
         );
     }
-    sort(keys %dists);
+    if ($args{detail}) {
+        return values %dists;
+    } else {
+        return sort(keys %dists);
+    }
 }
 
 sub list_dist_modules {
@@ -128,7 +135,11 @@ relative.
 
 Caveat: many Linux distributions strip C<.packlist> files.
 
-=head2 list_dists() => LIST
+=head2 list_dists
+
+Usage:
+
+ list_dists(%opts) => LIST
 
 Find all C<.packlist> files in C<@INC> and then pick the dist names from the
 paths, because C<.packlist> files are put in:
@@ -136,6 +147,20 @@ paths, because C<.packlist> files are put in:
  $INC/$Config{archname}/auto/Foo/Bar/.packlist
 
 Caveat: many Linux distributions strip C<.packlist> files.
+
+Known options:
+
+=over
+
+=item * detail
+
+Bool. If set to true, instead of a list of distribution names, the function will
+return a list of hashrefs containing detailed information e.g.:
+
+ (
+   {dist=>"Foo-Bar", packlist=>"/home/u1/perl5/perlbrew/perls/perl-5.34.0/lib/site_perl/5.34.0/x86_64-linux/auto/Foo/Bar/.packlist"},
+   ...
+ )
 
 =head2 list_dist_modules($mod) => LIST
 
