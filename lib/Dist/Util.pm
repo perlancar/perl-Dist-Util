@@ -1,16 +1,17 @@
 package Dist::Util;
 
-# DATE
-# VERSION
-
-use 5.010001;
 use strict;
 use warnings;
 
 use Config;
+use Exporter 'import';
 use File::Spec;
 
-require Exporter;
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(
                        list_dist_modules
@@ -125,6 +126,8 @@ C<Package::SubPkg> or C<Package/SubPkg.pm>). Return undef if none is found.
 Depending on the content of C<@INC>, the returned path may be absolute or
 relative.
 
+Caveat: many Linux distributions strip C<.packlist> files.
+
 =head2 list_dists() => LIST
 
 Find all C<.packlist> files in C<@INC> and then pick the dist names from the
@@ -142,3 +145,10 @@ first finding the C<.packlist> file, then look at all the C<.pm> files listed in
 the packlist.
 
 Will return empty list if fails to get the packlist.
+
+Caveat: many Linux distributions strip C<.packlist> files.
+
+
+=head1 SEE ALSO
+
+L<Dist::Util::Current>
